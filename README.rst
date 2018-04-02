@@ -1,4 +1,4 @@
-Electricity Monitor
+﻿Electricity Monitor
 ====================
 |GPL|
 
@@ -12,8 +12,12 @@ This program can help you to query, record and report the power usage of a dormi
 
 Note that the interface of Mengxiao only supports querying the dormitories in Xitucheng Campus at the moment. The other campus is not available now.
 
+To view the Chinese version of readme, please `click here`_.
+
 .. |GPL| image:: https://img.shields.io/badge/license-GPL-green.svg
    :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
+
+.. _click here: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/READMECN.rst
 
 Requirements
 --------------
