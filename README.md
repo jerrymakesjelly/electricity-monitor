@@ -1,2 +1,0 @@
-# electricity-monitor
-under construction

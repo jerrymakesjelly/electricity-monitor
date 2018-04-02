@@ -3,7 +3,7 @@ import time
 from datetime import datetime, timedelta
 import socket
 import json
-import logging
+import logger
 import requests
 import elecmon.exceptions
 
@@ -12,7 +12,7 @@ class ElectricityMonitor(object):
         self._username = username
         self._password = password
 
-        self._logger = logging.getLogger(__name__)
+        self._logger = logger.register(__name__)
 
         self._session = requests.Session()
         self._session.headers.update({
@@ -83,46 +83,39 @@ class ElectricityMonitor(object):
     def get_electricity_data(self, partmentId, floorId, dromNumber):
         search_url = 'https://webapp.bupt.edu.cn/w_dianfei/default/search'
         result = self._query(search_url, {'partmentId':partmentId, 'floorId':floorId, 'dromNumber':dromNumber})['data']
-        result['timeRemaining'] = self.time_remaining(result['time'], result['pTotal'], float(result['surplus'])+float(result['freeEnd']))
+        result['timeRemaining'] = time_remaining(datetime.strptime(result['time'], '%Y-%m-%d %H:%M:%S'), result['pTotal'], float(result['surplus'])+float(result['freeEnd']))
         return result
 
-    def convert_partment(self, dromitory_list):
+    def convert_partment(self, dormitory_list):
         partment_list = self.get_part_list()
 
-        for dromitory in dromitory_list:
+        for dormitory in dormitory_list:
             drom_found = False
             for partment in partment_list:
-                if dromitory['partment'] == partment['partmentName']:
-                    dromitory['partment'] = partment['partmentId']
+                if dormitory['partment'] == partment['partmentName']:
+                    dormitory['partment'] = partment['partmentId']
                     drom_found = True
                     break
             if not drom_found:
-                raise elecmon.exceptions.PartmentNameNotFound('"'+dromitory['partment']+'" is not in the partment list.')
+                raise elecmon.exceptions.PartmentNameNotFound('"'+dormitory['partment']+'" is not in the partment list.')
     
-    def query_data(self, dromitory_list):
-        self.convert_partment(dromitory_list)
+    def query_data(self, dormitory_list):
+        self.convert_partment(dormitory_list)
 
         result = []
-        for dromitory in dromitory_list:
-            result.append(self.get_electricity_data(dromitory['partment'], dromitory['floor'], dromitory['dromitory']))
+        for dormitory in dormitory_list:
+            result.append(self.get_electricity_data(dormitory['partment'], dormitory['floor'], dormitory['dormitory']))
         
         return result
 
-    def time_remaining(self, time, power, remaining):
-        if float(power) == 0:
-            return 'Infinite'
-        else:
-            return (datetime.strptime(time, '%Y-%m-%d %H:%M:%S') + timedelta(hours=float(remaining) / float(power))). \
-                strftime('%Y-%m-%d %H:%M:%S')
-    
-    def loop(self, dromitory_list, callback_function, time_interval=60):
+    def loop(self, dormitory_list, callback_function, params=None, time_interval=60):
         socket.setdefaulttimeout(time_interval*1.5)
 
         self._logger.debug('Start getting dormitory list...')
 
         while True:
             try:
-                self.convert_partment(dromitory_list)
+                self.convert_partment(dormitory_list)
                 break
             except elecmon.exceptions.RemoteFailed as e:
                 self._logger.warning("Can't get dormitory list: %s. Try again after 5 seconds.", str(e))
@@ -134,12 +127,13 @@ class ElectricityMonitor(object):
         while True:
             last_exception = None
             start_time = datetime.now()
-            for dromitory in dromitory_list:
+            for dormitory in dormitory_list:
                 attempt = 0
                 while attempt < 3:
                     try:
                         attempt += 1
-                        callback_function(dromitory, True, self.get_electricity_data(dromitory['partment'], dromitory['floor'], dromitory['dromitory']))
+                        callback_function(dormitory, True, 
+                            self.get_electricity_data(dormitory['partment'], dormitory['floor'], dormitory['dormitory']), params)
                         break
                     except elecmon.exceptions.LoginFailed as e:
                         last_exception = e
@@ -154,12 +148,23 @@ class ElectricityMonitor(object):
                         self._logger.warning(str(e)+' [Attempt: '+str(attempt)+']')
                         self._logger.debug('TRACEBACK:\n', exc_info=True)
                 if attempt > 3:
-                    callback_function(dromitory, False, {'message': str(last_exception)})
+                    callback_function(dormitory, False, {'message': str(last_exception)}, params)
                     self._logger.error('After 3 attempts we still can not get the data, the data points have been skipped. Please wait 60 seconds.')
             end_time = datetime.now()
             fix_interval = (end_time - start_time).total_seconds()
             if fix_interval < time_interval:
-                time.sleep(time_interval - fix_interval)
+                try:
+                    time.sleep(time_interval - fix_interval)
+                except KeyboardInterrupt:
+                    self._logger.info('Aborted by user.')
+                    exit()
             else:
                 pass # start immediately
             
+def time_remaining(time, power, remaining):
+    if float(power) == 0:
+        return 'Infinite'
+    else:
+        return (time + timedelta(hours=float(remaining) / float(power))). \
+            strftime('%Y-%m-%d %H:%M:%S')
+    

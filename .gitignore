@@ -103,5 +103,8 @@ ENV/
 # config file
 *.json
 
-#log
+# log file
 /log
+
+# database
+/database
