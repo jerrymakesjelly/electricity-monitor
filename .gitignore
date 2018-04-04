@@ -104,10 +104,10 @@ ENV/
 *.json
 
 # log file
-/log
+*.log
 
 # PNG image
 *.png
 
 # database
-/database
+*.db
