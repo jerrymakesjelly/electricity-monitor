@@ -20,9 +20,9 @@ def output(dormitory, success, data, params=None):
     else:
         print(data['message'])
 
-def daemon_send_report(param, sender, db):
+def daemon_send_report(param, sender, db, threshold):
     for dorm in param['dormitory_list']:
-        sender.send_report(dorm['mail_receiver'], dorm['dormitory'], db)
+        sender.send_report(dorm['mail_receiver'], dorm['dormitory'], db, threshold)
 
 def daemon_output(dormitory, success, data, params):
     if success:
@@ -31,8 +31,9 @@ def daemon_output(dormitory, success, data, params):
         # Check if we need to send a mail
         settings = json.load(open(db_config_path, encoding='utf-8'))
         today = datetime.datetime.now().date()
-        if today.strftime('%a') == settings['report_day'] and today.strftime(date_format) != settings['last_report']:
-            daemon_send_report(params[2], params[1], params[0])
+        if (today.strftime('%a') == settings['report_day'] or data['surplus']+data['freeEnd']<settings['warning_threshold'] ) \
+            and today.strftime(date_format) != settings['last_report']:
+            daemon_send_report(params[2], params[1], params[0], settings['warning_threshold'])
             # Save last report time
             settings['last_report'] = today.strftime(date_format)
             json.dump(settings, open(db_config_path, mode='w', encoding='utf-8'))
@@ -100,6 +101,7 @@ if __name__ == '__main__':
     db_config = {
         'database': './database/record.db',
         'report_day': 'Sat',
+        'warning_threshold': 5,
         'last_report': datetime.datetime.now().date().strftime(date_format)
     }
 

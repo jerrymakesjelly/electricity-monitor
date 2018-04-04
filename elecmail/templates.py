@@ -9,5 +9,5 @@ class ReportTemplate(object):
     content = 'elecmail/templates/report.html'
 
 class WarningTemplate(object):
-    title = "%s 的剩余电量不足 5 kWh"
+    title = "%s 的剩余电量不足 %d kWh"
     content = 'elecmail/templates/warning.html'

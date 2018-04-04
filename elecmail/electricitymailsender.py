@@ -133,7 +133,7 @@ class ElectricityMailSender(object):
         plt.close(111)
 
     # Send the report
-    def send_report(self, receivers, dormitory, erec):
+    def send_report(self, receivers, dormitory, erec, threshold):
         # Get the last datapoint
         last_dp = erec.last_datapoint(dormitory)
         if last_dp == None:
@@ -146,11 +146,11 @@ class ElectricityMailSender(object):
         # Check if the remaining is less than 5 kWh
         title = ''
         notice = ''
-        if last_dp.surplus+last_dp.freeEnd < 5:
+        if last_dp.surplus+last_dp.freeEnd < threshold:
             remaining = last_dp.surplus+last_dp.freeEnd
-            title = templates.WarningTemplate.title % dormitory
+            title = templates.WarningTemplate.title % (dormitory, threshold)
             notice = codecs.open(logger.abspath(templates.WarningTemplate.content), 'r', 'utf-8').read() % \
-                (remaining, remaining / last_dp.pTotal / 24)
+                (dormitory, threshold, remaining / last_dp.pTotal / 24)
         else:
             title = templates.ReportTemplate.title % dormitory
         # Make parameter structure
