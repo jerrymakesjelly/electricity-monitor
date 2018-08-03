@@ -11,7 +11,7 @@ class ConfigMan(object):
     @staticmethod
     def _make_directory(module):
         module_path = os.path.join(os.path.expanduser('~'), '.%s' % module)
-        os.makedirs(module_path, mode=0o600, exist_ok=True)
+        os.makedirs(module_path, mode=0o755, exist_ok=True)
         return module_path
     
     # Load configurations

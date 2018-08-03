@@ -1,13 +1,14 @@
 language: python
+sudo: required
 python:
   - "3.4"
   - "3.5"
   - "3.6"
   - "3.7"
 install:
-  - pip install requests 
-  - pip install pytest requests_mock mock
-  - pip install setuptools
+  - sudo pip install requests 
+  - sudo pip install pytest requests_mock mock
+  - sudo pip install setuptools
 script:
   - python -m pytest -vv
   - python setup.py install
