@@ -106,8 +106,4 @@ ENV/
 # log file
 *.log
 
-# PNG image
-*.png
-
-# database
-*.db
+.pytest_cache/
