@@ -1,13 +1,18 @@
 language: python
+
 python:
   - "3.4"
   - "3.5"
   - "3.6"
-  - "3.7"
+
 install:
   - pip install requests 
-  - pip install pytest requests_mock mock
+  - pip install pytest requests_mock mock pytest-cov codecov
   - pip install setuptools
+
 script:
-  - python -m pytest -vv
+  - python -m pytest -vv --cov=./
   - python setup.py install
+
+after_success:
+  - codecov
