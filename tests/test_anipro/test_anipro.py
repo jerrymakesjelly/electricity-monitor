@@ -8,10 +8,7 @@ def test_bar_progress(capsys):
     time.sleep(5.1)
     ap.stop_progress()
     outerr = capsys.readouterr()
-    if isinstance(outerr, tuple):
-        out = outerr[0]
-    else:
-        out = outerr.out
+    out = outerr[0] if isinstance(outerr, tuple) else outerr.out
     assert out == 'Bar Test Text...........\n'
 
 def test_rotate_progress(capsys):
@@ -19,8 +16,5 @@ def test_rotate_progress(capsys):
     time.sleep(2.1)
     ap.stop_progress()
     outerr = capsys.readouterr()
-    if isinstance(outerr, tuple):
-        out = outerr[0]
-    else:
-        out = outerr.out
+    out = outerr[0] if isinstance(outerr, tuple) else outerr.out
     assert out == 'Rotated Test Text \b-\b\\\b|\b/\b-\n'
