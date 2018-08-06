@@ -1,0 +1,14 @@
+environment:
+  matrix:
+    - PYTHON: "C:\\Python36-x64"
+
+install:
+  - "%PYTHON%\\python.exe -m pip install requests"
+  - "%PYTHON%\\python.exe -m pip install pytest requests_mock mock"
+  - "%PYTHON%\\python.exe -m pip install setuptools"
+
+build: off
+
+test_script:
+  - "%PYTHON%\\python.exe -m pytest -vv"
+  - "%PYTHON%\\python.exe setup.py install"
