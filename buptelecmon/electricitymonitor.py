@@ -111,7 +111,7 @@ class ElectricityMonitor(object):
                 # Convert Parment
                 partment = self._convert_to_uppercase_number(int(parts[0]))
                 for p in partment_list:
-                    if p['partmentName'].find(partment) > 0:
+                    if p['partmentName'].find(partment) == 1:
                         partment = p['partmentId']
                         found = True
                 if found: # This partment name can be converted to partment id
