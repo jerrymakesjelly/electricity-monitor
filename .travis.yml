@@ -1,18 +1,21 @@
 language: python
-
 python:
-  - "3.4"
-  - "3.5"
-  - "3.6"
-
+- '3.4'
+- '3.5'
+- '3.6'
 install:
-  - pip install requests 
-  - pip install pytest requests_mock mock pytest-cov codecov
-  - pip install setuptools
-
+- pip install requests
+- pip install pytest requests_mock mock pytest-cov codecov
+- pip install setuptools
 script:
-  - python -m pytest -vv --cov=./
-  - python setup.py install
-
+- python -m pytest -vv --cov=./
+- python setup.py install
 after_success:
-  - codecov
+- codecov
+deploy:
+  provider: pypi
+  user: jerrymakesjelly
+  password:
+    secure: Gq4TDMHAcyP7IU2mTuVARTm86DxXAkTB079OAdmxfpFqXs9bNGqPAVZ74ZGjBzhGEAknM/FNAvxCIkSE6kXsTCKytMVgU4grXr0lxwfBafdXSnPIjRHKCyxv89Ip0G5hcirnAqj4BfgrI4q0M+ZUzFX8VnvlsZxLRWYHb7j2bO8OcefjCwnk43xaZDyrrzcsH+yDANKBjsgCAa55Hr29U2AmxDaPPJDNrM/MZqTLNSSHsBsqmVntG0KiqzA1wVpL5QHp/EOj+lHak08IWI+96AW1kusgLp9QnGzOvIuQacV0BD/7ygsFaVWGSetcMqe0+DE3INKbVjRAvzk1sLUYG6S/ggIoIcf0elu6X0sDtBd64NZ4nUS+Aj9baLWY3Gty/2eD9Wf5ajytGkewwF0x0MQfJzCq0Z9suaVdw3djWAN+P6DregnZMuqw1ZUtSNOpTXvdFGaRUoNnb0W21AfjBZ4dFMf4lPnrusPkOedW4K7JdQnfFCdXayGQRc8+Q2ttPsR+V2pgX5yhHlSu2GHticb+LQRWPnS2VMuEMPdPhHilJMx8FHL0+KyPlSEj5a/K1MUl7lbXjI4zzsJJnqdJKe0dnRDajEQH2X0o0bHWdDxuImTWdTFKkbpo3iD/njpFzU/L8JxrPfyy19hnZw6W/R87jSD4SOyqFymtK1JUzho=
+  on:
+    tags: true

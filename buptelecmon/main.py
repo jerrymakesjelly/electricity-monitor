@@ -4,6 +4,7 @@ import buptelecmon.logger
 import buptelecmon.configurationmanager
 import buptelecmon.electricitymonitor
 import buptelecmon.animateprogress
+import buptelecmon.version
 
 # Initialize animate process bar
 ap = buptelecmon.animateprogress.AnimateProgress()
@@ -68,7 +69,9 @@ def main(argv):
             'dormitories': []
         }
         # Parse arguments
-        if len(argv) > 0 and argv[0] == '--set-auth': # Set authorization
+        if len(argv) > 0 and argv[0] == '--version': # Display version info
+            print(buptelecmon.version.about)
+        elif len(argv) > 0 and argv[0] == '--set-auth': # Set authorization
             param['username'] = input('Student ID: ')
             param['password'] = input('Password: ')
             cman.write_back(param)

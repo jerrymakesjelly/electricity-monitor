@@ -16,10 +16,7 @@ BUPT Electricity Monitor
   :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/context:python
 
 .. image:: https://img.shields.io/github/license/jerrymakesjelly/electricity-monitor.svg
-  :target: LICENSE
-
-.. image:: https://img.shields.io/badge/Pull%20Requests-welcomed-ff69b4.svg
-
+  :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
 
 Free yourself from the tedious operation, now you can just use a one-line command to view the electricity information of your dormitory.
 
@@ -99,7 +96,7 @@ We allow you to use the APIs to build your applications, for example::
 
 For more information, please read the `APIs Document`_.
 
-.. _APIs Document: docs/apis.md
+.. _APIs Document: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/docs/apis.md
 
 Screenshot
 ------------
@@ -107,7 +104,7 @@ Screenshot
 
 Changelog
 ----------
-**Fri, 10 Aug 2018**: 1.1.0 Released :label:
+**Fri, 11 Aug 2018**: 1.1.0 Released :label:
 
 * Removed daemon mode 
 * Added configuration mode - We don't need to write json file manually anymore 
@@ -117,6 +114,6 @@ Changelog
 
 License
 --------
-This software is distributed under the `GPL License`_.
+This software is distributed under the `MIT License`_.
 
-.. _GPL License: LICENSE
+.. _MIT License: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE

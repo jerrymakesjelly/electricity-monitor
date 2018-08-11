@@ -8,22 +8,21 @@ setup(name = 'buptelecmon',
     description = 'A program for checking electricity charge.',
     long_description = open('README.rst').read(),
     classifiers = [
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Utilities'
     ], # Get more classifiers from https://pypi.org/pypi?%3Aaction=list_classifiers
     keywords = 'python bupt electricity',
     author = 'jerrymakesjelly',
-    author_email = 'ganzhaoyu037@sina.com',
+    author_email = 'ganzhaoyu037@gmail.com',
     url = 'https://github.com/jerrymakesjelly/electricity-monitor',
-    license = 'GPLv3',
+    license = 'MIT',
     packages = find_packages(),
     include_package_data = True,
     zip_safe = True,
     install_requires = [
-        'enum34',
         'requests'
     ],
     entry_points = {

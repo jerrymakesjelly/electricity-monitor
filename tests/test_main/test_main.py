@@ -13,6 +13,9 @@ import buptelecmon.configurationmanager
 def test_remaining_time_convertion():
     assert buptelecmon.main.convert_rat(26.0512) == '1day(s) 02:03:04'
 
+def test_version():
+    buptelecmon.main.main(['--version'])
+
 def test_set_auth():
     # Replace stdin for mocking
     # Thanks to https://stackoverflow.com/a/36491341
