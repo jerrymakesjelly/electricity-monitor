@@ -34,7 +34,7 @@ class ElectricityMonitor(object):
                 else:
                     raise buptelecmon.exceptions.LoginFailed(response['m'])
             else: # Error Response
-                raise buptelecmon.exceptions.RemoteFailed(
+                raise buptelecmon.exceptions.RemoteError(
                     str(response['status'])+' '+response['name'] if 'status' in response
                     else 'The remote server has encountered an error.', res.text
                 )
@@ -51,7 +51,7 @@ class ElectricityMonitor(object):
                 self._logger.debug('Getting data from '+str(url)+' is successful.')
                 return response # success
             else:
-                raise buptelecmon.exceptions.RemoteFailed(
+                raise buptelecmon.exceptions.RemoteError(
                     str(response['status'])+' '+response['name'] if 'status' in response
                     else 'The remote server has encountered an error.', res.text
                 )

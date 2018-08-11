@@ -17,7 +17,7 @@ def convert_rat(remaining_hrs):
 
 # Output formater
 def output(dormitory, data, params=None):
-    print('%s %s - Remaining: %.2f kWh (Free: %.2f kWh).' % 
+    print('%s %s - Surplus: %.2f kWh (Free: %.2f kWh).' % 
         (
             dormitory, 
             data['time'], 
@@ -39,7 +39,7 @@ def output(dormitory, data, params=None):
 
 # Run once mode
 def once_mode(username, password, dormitories):
-    ap.start_rotated_progress('Collecting data...')
+    ap.start_rotated_progress('Pulling data...')
     em = buptelecmon.electricitymonitor.ElectricityMonitor()
     em.login(username, password)
     results = em.query(dormitories)

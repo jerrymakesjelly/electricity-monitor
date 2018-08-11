@@ -7,7 +7,7 @@ class NeedLogin(Exception):
     def __init__(self, arg):
         Exception.__init__(self, arg)
 
-class RemoteFailed(Exception):
+class RemoteError(Exception):
     def __init__(self, arg, remote_content):
         Exception.__init__(self, arg)
 

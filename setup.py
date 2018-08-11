@@ -28,7 +28,7 @@ setup(name = 'buptelecmon',
     ],
     entry_points = {
         'console_scripts':[
-            'elecfee = buptelecmon.main:loader'
+            'elecinfo = buptelecmon.main:loader'
         ]
     }
 )

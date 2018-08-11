@@ -24,7 +24,7 @@ def test_login_with_internal_error(requests_mock):
     # Mock an error response
     requests_mock.post(LOGIN_URL,
         text='{"name":"Internal Server Error","message":"There was an error at the server.","code":0,"status":500}')
-    with pytest.raises(buptelecmon.exceptions.RemoteFailed):
+    with pytest.raises(buptelecmon.exceptions.RemoteError):
         em.login('', '')
 
 # Now the token is wrong

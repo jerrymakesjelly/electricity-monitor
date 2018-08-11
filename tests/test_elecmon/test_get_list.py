@@ -27,7 +27,7 @@ def test_query_with_internal_error():
     # Login
     em.login(os.environ['MENGXIAO_STUDENT_ID'], os.environ['MENGXIAO_PASSWORD'])
     # Test
-    with pytest.raises(buptelecmon.exceptions.RemoteFailed):
+    with pytest.raises(buptelecmon.exceptions.RemoteError):
         em.get_floor_list('abc')
 
 # Successful Tests
@@ -41,7 +41,7 @@ def test_dorm_list_correctly():
     em.get_dorm_list(os.environ['MENGXIAO_TEST_PARTMENT'], os.environ['MENGXIAO_TEST_FLOOR'])
 
 def test_dorm_list_unsuccessfully():
-    with pytest.raises(buptelecmon.exceptions.RemoteFailed):
+    with pytest.raises(buptelecmon.exceptions.RemoteError):
         em.get_dorm_list('def', 'ghi')
 
 def test_electricity_data_correctly():
@@ -49,5 +49,5 @@ def test_electricity_data_correctly():
         os.environ['MENGXIAO_TEST_FLOOR'], os.environ['MENGXIAO_TEST_DORMITORY'])
 
 def test_electricity_data_with_non_existed_dormitory():
-    with pytest.raises(buptelecmon.exceptions.RemoteFailed):
+    with pytest.raises(buptelecmon.exceptions.RemoteError):
         em.get_electricity_data('jkl', 'mno', 'pqr')
