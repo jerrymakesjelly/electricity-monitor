@@ -1,22 +1,6 @@
-BUPT Electricity Monitor
-=========================
-.. image:: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor.svg
-    :target: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor
-
-.. image:: https://ci.appveyor.com/api/projects/status/lqxj0s3fo21payke?svg=true
-    :target: https://ci.appveyor.com/project/jerrymakesjelly/electricity-monitor
-
-.. image:: https://codecov.io/gh/jerrymakesjelly/electricity-monitor/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/jerrymakesjelly/electricity-monitor
-
-.. image:: https://img.shields.io/lgtm/alerts/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
-  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/alerts/
-
-.. image:: https://img.shields.io/lgtm/grade/python/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
-  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/context:python
-
-.. image:: https://img.shields.io/github/license/jerrymakesjelly/electricity-monitor.svg
-  :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
+BUPT Electricity Monitor 
+==========================
+|PyPI| |Codecov| |TravisCI| |AppVeyorCI| |LGTMAlerts| |LGTMQuality| |License|
 
 Free yourself from the tedious operation, now you can just use a one-line command to view the electricity information of your dormitory.
 
@@ -26,6 +10,27 @@ The data comes from the BUPT Work WeChat. But please **notice that** this utilit
 
 * Get your power data easily, including surplus, voltage, current, power, etc.
 * Calculate available time.
+
+.. |PyPI| image:: https://badge.fury.io/py/autoremove-torrents.svg
+    :target: https://pypi.org/project/buptelecmon
+
+.. |TravisCI| image:: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor.svg
+    :target: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor
+
+.. |AppVeyorCI| image:: https://ci.appveyor.com/api/projects/status/lqxj0s3fo21payke?svg=true
+    :target: https://ci.appveyor.com/project/jerrymakesjelly/electricity-monitor
+
+.. |Codecov| image:: https://codecov.io/gh/jerrymakesjelly/electricity-monitor/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/jerrymakesjelly/electricity-monitor
+
+.. |LGTMAlerts| image:: https://img.shields.io/lgtm/alerts/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
+  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/alerts/
+
+.. |LGTMQuality| image:: https://img.shields.io/lgtm/grade/python/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
+  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/context:python
+
+.. |License| image:: https://img.shields.io/github/license/jerrymakesjelly/electricity-monitor.svg
+  :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
 
 Requirements
 -------------
