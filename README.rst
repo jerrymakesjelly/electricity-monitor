@@ -11,7 +11,7 @@ The data comes from the BUPT Work WeChat. But please **notice that** this utilit
 * Get your power data easily, including surplus, voltage, current, power, etc.
 * Calculate available time.
 
-.. |PyPI| image:: https://badge.fury.io/py/autoremove-torrents.svg
+.. |PyPI| image:: https://badge.fury.io/py/buptelecmon.svg
     :target: https://pypi.org/project/buptelecmon
 
 .. |TravisCI| image:: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor.svg
