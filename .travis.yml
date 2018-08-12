@@ -4,9 +4,8 @@ python:
 - '3.5'
 - '3.6'
 install:
-- pip install requests
-- pip install pytest requests_mock mock pytest-cov codecov
-- pip install setuptools
+- pip install -r requirements.txt
+- pip install -r requirements-dev.txt
 script:
 - python -m pytest -vv --cov=./
 - python setup.py install

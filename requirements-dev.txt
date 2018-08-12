@@ -1,0 +1,6 @@
+pytest
+requests_mock
+mock
+pytest-cov
+codecov
+setuptools
