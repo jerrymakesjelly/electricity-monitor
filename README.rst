@@ -97,7 +97,7 @@ Full Command Line
 --recharge      Display a recharge QR code.
 ==============  ======================================================================
 
-**Note:** Please DO NOT query too many dormitories at the same time or query too frequently, otherwise you may receive ``HTTP 500 Internal Server Error``s from the remote server.
+**Note:** Please DO NOT query too many dormitories at the same time or query too frequently, otherwise you may receive ``HTTP 500 Internal Server Error`` s from the remote server.
 
 APIs
 +++++
@@ -120,11 +120,13 @@ Screenshot
 
 Changelog
 ----------
-**Sun, 12 Aug 2018**: 1.2.0 Released :label:
+**Mon, 13 Aug 2018**: 1.2.1 released. Fix documentation error. :bookmark:
+
+**Sun, 12 Aug 2018**: 1.2.0 released :bookmark:
 
 * Added recharge mode
 
-**Sat, 11 Aug 2018**: 1.1.0 Released :label:
+**Sat, 11 Aug 2018**: 1.1.0 released :bookmark:
 
 * Removed daemon mode 
 * Added configuration mode - We don't need to write json file manually anymore 
