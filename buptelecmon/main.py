@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import sys
+import qrcode
 import buptelecmon.logger
 import buptelecmon.configurationmanager
 import buptelecmon.electricitymonitor
@@ -55,6 +56,23 @@ def loop_mode(username, password, dormitories):
     em.login(username, password)
     em.loop(dormitories, output)
 
+# Set authorization mode
+def set_auth():
+    user = input('Student ID: ')
+    password = input('Password: ')
+    return (user, password)
+
+# Recharge mode
+def recharge_mode(username, password, dormitory_number):
+    em = buptelecmon.electricitymonitor.ElectricityMonitor()
+    em.login(username, password)
+    qr = qrcode.QRCode()
+    qr.add_data(em.get_recharge_link(dormitory_number))
+    print('Use your WeChat to scan the QR code of the recharge link.')
+    print('Please confirm your information before payment.')
+    print()
+    qr.print_ascii(invert=True)
+
 # Main function
 def main(argv):
     # Create logger
@@ -72,14 +90,15 @@ def main(argv):
         if len(argv) > 0 and argv[0] == '--version': # Display version info
             print(buptelecmon.version.about)
         elif len(argv) > 0 and argv[0] == '--set-auth': # Set authorization
-            param['username'] = input('Student ID: ')
-            param['password'] = input('Password: ')
+            param['username'], param['password'] = set_auth()
             cman.write_back(param)
         else:
             # Load configurations
             param = cman.read()
             # Run
-            if len(argv) > 0 and argv[0] == '--loop': # Loop mode
+            if len(argv) > 1 and argv[0] == '--recharge': # Recharge mode
+                recharge_mode(param['username'], param['password'], argv[1])
+            elif len(argv) > 0 and argv[0] == '--loop': # Loop mode
                 if len(argv) > 1:
                     param['dormitories'] = argv[1:]
                     cman.write_back(param)

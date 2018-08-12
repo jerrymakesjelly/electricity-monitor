@@ -13,12 +13,16 @@ em = buptelecmon.electricitymonitor.ElectricityMonitor()
 em.login(os.environ['MENGXIAO_STUDENT_ID'], os.environ['MENGXIAO_PASSWORD'])
 
 def test_convertion_correcyly():
-    floor_cases = {
-        '5-999': 9, '13-1526': 15, '29-D999': -9, '6-111-11': 1
+    cases = {
+        '1-999': ('学一楼', 9), 
+        '13-1526': ('学十三楼', 15), 
+        '29-D999': ('学二十九楼', -9), 
+        '6-111-11': ('学六楼', 1)
     }
-    results = em._convert_partment([x for x in floor_cases])
+    results = em._convert_partment([x for x in cases])
     for result in results:
-        assert result['floor'] == floor_cases[result['dormitory']]
+        assert result['partmentName'] == cases[result['dormitory']][0]
+        assert result['floor'] == cases[result['dormitory']][1]
 
 def test_query_with_wrong_format():
     with pytest.raises(buptelecmon.exceptions.InvalidDormitoryNumber):

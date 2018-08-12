@@ -51,3 +51,6 @@ def test_electricity_data_correctly():
 def test_electricity_data_with_non_existed_dormitory():
     with pytest.raises(buptelecmon.exceptions.RemoteError):
         em.get_electricity_data('jkl', 'mno', 'pqr')
+
+def test_recharge_link(test_dormitories):
+    em.get_recharge_link(test_dormitories[0])

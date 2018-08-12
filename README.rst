@@ -71,13 +71,22 @@ Also, this command tool will remember the dormitory number of the last query. Ne
 
   elecinfo
 
+Recharge
+---------
+Use this tool to visit the recharge page directly.
+::
+
+    elecinfo --recharge <dormitory-number>
+
+Then, a QR code will be shown on your terminal. Please use your WeChat to scan the QR code and pay for it.
+
 Advanced Usage
 ---------------
 Full Command Line
 ++++++++++++++++++
 ::
 
-  elecinfo [ --version | --set-auth | [--loop] dormitory-list]
+  elecinfo [ --version | --set-auth | [--loop] <dormitory-number-1> [... <dormitory-number-n>] | --recharge <dormitory-number>]
 
 ==============  ======================================================================
  Option         Description
@@ -85,14 +94,16 @@ Full Command Line
 --version       Display the version of this tool.
 --set-auth      Set your authorization information, as the Quick Start - Step 2 shows.
 --loop          Repeat querying electricity information every 60 seconds.
-dormitory-list  A list of dormitories to be queried, separated by whitespaces.
+--recharge      Display a recharge QR code.
 ==============  ======================================================================
 
-**Note:** Please DO NOT query too many dormitories at the same time or query too frequently, otherwise you may receive ``HTTP 500 Internal Server Error`` s from the remote server.
+**Note:** Please DO NOT query too many dormitories at the same time or query too frequently, otherwise you may receive ``HTTP 500 Internal Server Error``s from the remote server.
 
 APIs
 +++++
-We allow you to use the APIs to build your applications, for example::
+We allow you to use the APIs to build your applications, for example:
+
+.. code:: python
 
   import buptelecmon
   em = buptelecmon.electricitymonitor.ElectricityMonitor()
@@ -109,7 +120,11 @@ Screenshot
 
 Changelog
 ----------
-**Fri, 11 Aug 2018**: 1.1.0 Released :label:
+**Sun, 12 Aug 2018**: 1.2.0 Released :label:
+
+* Added recharge mode
+
+**Sat, 11 Aug 2018**: 1.1.0 Released :label:
 
 * Removed daemon mode 
 * Added configuration mode - We don't need to write json file manually anymore 

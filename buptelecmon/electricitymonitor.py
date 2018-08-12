@@ -4,6 +4,7 @@ import socket
 import threading
 import json
 import requests
+import urllib.parse
 from datetime import datetime, timedelta
 import buptelecmon.logger
 import buptelecmon.exceptions
@@ -80,6 +81,18 @@ class ElectricityMonitor(object):
         search_url = 'https://webapp.bupt.edu.cn/w_dianfei/default/search'
         return self._query(search_url, {'partmentId':partmentId, 'floorId':str(floorId), 'dromNumber':dromNumber})['data']
 
+    # Get recharging link
+    def get_recharge_link(self, dormitory_number):
+        parameters = self._convert_partment([dormitory_number])[0]
+        values = {
+            'partmentId': parameters['partmentId'],
+            'floorId': parameters['floor'],
+            'dromNumber': parameters['dormitory'],
+            'partmentName': parameters['partmentName']
+        }
+        return 'https://webapp.bupt.edu.cn/w_dianfei/recharge/index?%s' % \
+            urllib.parse.urlencode(values)
+
     # Convert an arabic numeral to uppercase number
     @staticmethod
     def _convert_to_uppercase_number(number):
@@ -109,15 +122,20 @@ class ElectricityMonitor(object):
                 elif len(parts[1]) == 3: # One-digit floor number
                     floor = int(parts[1][0])
                 # Convert Parment
-                partment = self._convert_to_uppercase_number(int(parts[0]))
+                partmentId = ''
+                partmentName = self._convert_to_uppercase_number(int(parts[0]))
                 for p in partment_list:
-                    if p['partmentName'].find(partment) == 1:
-                        partment = p['partmentId']
+                    if p['partmentName'].find(partmentName) == 1:
+                        partmentId = p['partmentId']
+                        partmentName = p['partmentName']
                         found = True
                 if found: # This partment name can be converted to partment id
-                    result.append({'partment': partment, 'floor': floor, 'dormitory': dormitory})
+                    result.append({
+                        'partmentId': partmentId, 'partmentName': partmentName,
+                        'floor': floor, 'dormitory': dormitory
+                    })
                 else:
-                    raise buptelecmon.exceptions.PartmentNameNotFound('"'+partment+'" is not in the partment list.')
+                    raise buptelecmon.exceptions.PartmentNameNotFound('"'+parts[0]+'" is not in the partment list.')
             else:
                 raise buptelecmon.exceptions.InvalidDormitoryNumber('"'+dormitory+'" is not a valid dormitory number.')
         return result
@@ -139,7 +157,7 @@ class ElectricityMonitor(object):
         dormitories = self._convert_partment(dormitory_list)
         for dormitory in dormitories:
             trd = threading.Thread(target=self._query_thread,
-                args=(dormitory['partment'], dormitory['floor'], dormitory['dormitory'], 
+                args=(dormitory['partmentId'], dormitory['floor'], dormitory['dormitory'], 
                 lambda dorm, data: result.update({dorm: data}),),
                 name='%s Pulling Thread' % dormitory['dormitory'])
             trd.start()
