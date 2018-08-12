@@ -1,9 +1,7 @@
 import sys
 import os
-import signal
 import time
 import json
-import threading
 import mock
 from contextlib import contextmanager
 from io import StringIO

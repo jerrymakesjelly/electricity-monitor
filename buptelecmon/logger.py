@@ -1,8 +1,6 @@
 # -*- coding:utf-8 -*-
 # Logging System
 
-import sys
-import os
 import logging
 
 LOG_FILE_PATH = 'electricity-monitor.log'

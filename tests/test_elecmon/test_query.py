@@ -3,7 +3,6 @@ import time
 import threading
 import pytest
 import mock
-import requests
 import requests_mock
 import json
 import buptelecmon.electricitymonitor

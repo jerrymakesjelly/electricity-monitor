@@ -2,10 +2,9 @@
 import time
 import socket
 import threading
-import json
 import requests
 import urllib.parse
-from datetime import datetime, timedelta
+from datetime import datetime
 import buptelecmon.logger
 import buptelecmon.exceptions
 
