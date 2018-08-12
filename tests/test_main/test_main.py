@@ -1,9 +1,7 @@
 import sys
 import os
-import signal
 import time
 import json
-import threading
 import mock
 from contextlib import contextmanager
 from io import StringIO
@@ -64,6 +62,9 @@ def test_loop_mode(test_dormitories):
     _sub_test_loop_mode(True)
     # Test with no parameter
     _sub_test_loop_mode(False)
+
+def test_recharge_mode(test_dormitories):
+    buptelecmon.main.main(['--recharge', test_dormitories[0]])
 
 def test_main_function():
     with mock.patch('buptelecmon.main.main'):

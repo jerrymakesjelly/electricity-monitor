@@ -7,6 +7,7 @@ The API document of Electricity Monitor. Note that this library only supports Py
 * [ElectricityMonitor.query](#electricitymonitorquery)
 * [ElectricityMonitor.loop](#electricitymonitorloop)
 * [ElectricityMonitor.stop_loop](#electricitymonitorstop_loop)
+* [ElectricityMonitor.get_recharge_link](#electricitymonitorget_recharge_link)
 * [ElectricityMonitor.get_part_list](#electricitymonitorget_part_list)
 * [ElectricityMonitor.get_floor_list](#electricitymonitorget_floor_list)
 * [ElectricityMonitor.get_dorm_list](#electricitymonitorget_dorm_list)
@@ -163,6 +164,32 @@ No exceptions.
 ### Example
 ```python
 >>> em.stop_looping()
+```
+
+## ElectricityMonitor.get_recharge_link
+### Definition
+```python
+def get_recharge_link(self, dormitory_number)
+```
+
+### Description
+Get a recharge link of a specified dormitory number.
+
+### Parameters
+Parameter | Type | Description
+--------- | ---- | -----------
+dormitory_number | ``str`` | Dormitory number in correct format.
+
+### Return Value
+A URL. Its type is ``str``.
+
+### Exceptions
+Same as the [Exceptions of ElectricityMonitor.query](#exceptions-1)
+
+### Example
+```python
+>>> em.get_recharge_link('1-101')
+'https://webapp.bupt.edu.cn/w_dianfei/recharge/index?partmentId=f8067fcf9c4f48c6b2f8e793d64b7b65&...'
 ```
 
 ## ElectricityMonitor.get_part_list
