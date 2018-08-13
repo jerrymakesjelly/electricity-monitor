@@ -120,6 +120,8 @@ Screenshot
 
 Changelog
 ----------
+**Mon, 13 Aug 2018**: 1.2.2 released. Fix a bug that prevent the program from quitting when an exception raises. :bookmark:
+
 **Mon, 13 Aug 2018**: 1.2.1 released. Fix documentation error. :bookmark:
 
 **Sun, 12 Aug 2018**: 1.2.0 released :bookmark:

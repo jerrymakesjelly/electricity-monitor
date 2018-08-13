@@ -111,6 +111,7 @@ def main(argv):
     except KeyboardInterrupt:
         log.info('Aborted by user.')
     except Exception as e:
+        ap.stop_progress()
         log.error(str(e))
         log.debug('', exc_info=True)
         log.error("Please check the log for more information.")

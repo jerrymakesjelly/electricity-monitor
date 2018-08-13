@@ -1,4 +1,4 @@
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 
 about = '''BUPT Electricity Monitor %s
 For more information, please visit https://github.com/jerrymakesjelly/electricity-monitor
