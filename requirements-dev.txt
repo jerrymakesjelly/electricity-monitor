@@ -3,4 +3,5 @@ requests_mock
 mock
 pytest-cov
 codecov
+codacy-coverage
 setuptools

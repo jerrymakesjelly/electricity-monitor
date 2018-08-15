@@ -1,6 +1,6 @@
 BUPT Electricity Monitor 
 ==========================
-|PyPI| |Codecov| |TravisCI| |AppVeyorCI| |LGTMAlerts| |LGTMQuality| |License|
+|PyPI| |TravisCI| |AppVeyorCI| |CodacyCoverage| |Codacy| |License|
 
 Free yourself from the tedious operation, now you can just use a one-line command to view the electricity information of your dormitory.
 
@@ -31,6 +31,12 @@ The data comes from the BUPT Work WeChat. But please **notice that** this utilit
 
 .. |License| image:: https://img.shields.io/github/license/jerrymakesjelly/electricity-monitor.svg
   :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
+
+.. |Codacy| image:: https://img.shields.io/codacy/grade/d6136382fa05479db539fe3299dd0f29.svg
+  :target: https://www.codacy.com/project/jerrymakesjelly/electricity-monitor/dashboard
+
+.. |CodacyCoverage| image:: https://api.codacy.com/project/badge/coverage/d6136382fa05479db539fe3299dd0f29
+   :target: https://www.codacy.com/app/jerrymakesjelly/electricity-monitor
 
 Requirements
 -------------
