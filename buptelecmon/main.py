@@ -26,7 +26,7 @@ def output(dormitory, data, params=None):
             float(data['surplus'])+float(data['freeEnd']), float(data['freeEnd'])
         )
     )
-    print('\t- Voltage/Current/Power/Power Factory: %.1f V, %.3f A, %.1f W, %.2f.' %
+    print('\t- Voltage/Current/Power/Power Factor: %.1f V, %.3f A, %.1f W, %.2f.' %
         (
             float(data['vTotal']),
             float(data['iTotal']),
