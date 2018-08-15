@@ -6,7 +6,7 @@ import json
 class ConfigMan(object):
     def __init__(self, module, filename):
         self._path = os.path.join(self._make_directory(module), filename)
-    
+
     # Get module directory or create it if it doesn't exist
     @staticmethod
     def _make_directory(module):

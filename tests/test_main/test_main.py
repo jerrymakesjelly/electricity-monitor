@@ -18,7 +18,7 @@ def test_set_auth():
     # Replace stdin for mocking
     # Thanks to https://stackoverflow.com/a/36491341
     @contextmanager
-    def replace_stdin(target): 
+    def replace_stdin(target):
         ori = sys.stdin
         sys.stdin = target
         yield
@@ -53,7 +53,7 @@ def test_once_mode(test_dormitories):
 def test_loop_mode(test_dormitories):
     # Sub test process
     def _sub_test_loop_mode(use_parameter):
-        with mock.patch('buptelecmon.electricitymonitor.ElectricityMonitor.loop', 
+        with mock.patch('buptelecmon.electricitymonitor.ElectricityMonitor.loop',
             side_effect=KeyboardInterrupt) as moc:
             buptelecmon.main.main(['--loop', test_dormitories[0]] if use_parameter
                 else ['--loop'])

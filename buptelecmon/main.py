@@ -19,22 +19,22 @@ def convert_rat(remaining_hrs):
 
 # Output formater
 def output(dormitory, data, params=None):
-    print('%s %s - Surplus: %.2f kWh (Free: %.2f kWh).' % 
+    print('%s %s - Surplus: %.2f kWh (Free: %.2f kWh).' %
         (
-            dormitory, 
-            data['time'], 
+            dormitory,
+            data['time'],
             float(data['surplus'])+float(data['freeEnd']), float(data['freeEnd'])
         )
     )
-    print('\t- Voltage/Current/Power/Power Factory: %.1f V, %.3f A, %.1f W, %.2f.' % 
+    print('\t- Voltage/Current/Power/Power Factory: %.1f V, %.3f A, %.1f W, %.2f.' %
         (
-            float(data['vTotal']), 
-            float(data['iTotal']), 
-            1000*float(data['pTotal']), 
+            float(data['vTotal']),
+            float(data['iTotal']),
+            1000*float(data['pTotal']),
             float(data['cosTotal'])
         )
     )
-    print('\t- Available time: %s.' % 
+    print('\t- Available time: %s.' %
         (convert_rat((float(data['surplus'])+float(data['freeEnd']) / float(data['pTotal'])))
             if float(data['pTotal']) != 0 else 'Infinite')
     )

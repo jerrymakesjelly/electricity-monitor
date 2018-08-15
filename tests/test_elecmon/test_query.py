@@ -13,9 +13,9 @@ em.login(os.environ['MENGXIAO_STUDENT_ID'], os.environ['MENGXIAO_PASSWORD'])
 
 def test_convertion_correcyly():
     cases = {
-        '1-999': ('学一楼', 9), 
-        '13-1526': ('学十三楼', 15), 
-        '29-D999': ('学二十九楼', -9), 
+        '1-999': ('学一楼', 9),
+        '13-1526': ('学十三楼', 15),
+        '29-D999': ('学二十九楼', -9),
         '6-111-11': ('学六楼', 1)
     }
     results = em._convert_partment([x for x in cases])

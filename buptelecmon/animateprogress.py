@@ -29,7 +29,7 @@ class AnimateProgress(object):
         self._count = 0
         self._animate_thread = threading.Thread(target=target, args=args, name='Rotated Progress Animation')
         self._animate_thread.start()
-    
+
     def start_rotated_progress(self, text='', interval=0.5):
         if not self._running:
             print(text, end=' ')

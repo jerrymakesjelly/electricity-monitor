@@ -20,7 +20,7 @@ class ElectricityMonitor(object):
             'X-Requested-With':'XMLHttpRequest'
         })
         self._looping = False
-    
+
     # Login to the service
     def login(self, username, password):
         commit_url = 'https://webapp.bupt.edu.cn/wap/login/commit.html'
@@ -113,7 +113,7 @@ class ElectricityMonitor(object):
             if len(parts) > 1 and parts[0].isnumeric():
                 # Speclate floor number
                 floor = 0
-                if len(parts[1]) == 4: 
+                if len(parts[1]) == 4:
                     if parts[1][0] == 'D': # Negative floor number
                         floor = -int(parts[1][1])
                     else: # Two-digit floor number
@@ -156,11 +156,11 @@ class ElectricityMonitor(object):
         dormitories = self._convert_partment(dormitory_list)
         for dormitory in dormitories:
             trd = threading.Thread(target=self._query_thread,
-                args=(dormitory['partmentId'], dormitory['floor'], dormitory['dormitory'], 
+                args=(dormitory['partmentId'], dormitory['floor'], dormitory['dormitory'],
                 lambda dorm, data: result.update({dorm: data}),),
                 name='%s Pulling Thread' % dormitory['dormitory'])
             trd.start()
-            thread_pool.append(trd)   
+            thread_pool.append(trd)
         # Wait for completion
         for trd in thread_pool:
             trd.join()
