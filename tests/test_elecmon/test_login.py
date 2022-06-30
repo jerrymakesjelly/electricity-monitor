@@ -6,7 +6,7 @@ import buptelecmon.electricitymonitor
 import buptelecmon.exceptions
 
 # Login URL
-LOGIN_URL = 'https://webapp.bupt.edu.cn/wap/login/commit.html'
+LOGIN_URL = 'https://auth.bupt.edu.cn/authserver/login'
 
 # Create the object
 em = buptelecmon.electricitymonitor.ElectricityMonitor()
