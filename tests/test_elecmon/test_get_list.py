@@ -6,7 +6,7 @@ import buptelecmon.electricitymonitor
 import buptelecmon.exceptions
 
 # URL of Getting Partment
-PARTMENT_URL = 'https://webapp.bupt.edu.cn/w_dianfei/default/part'
+PARTMENT_URL = 'https://app.bupt.edu.cn/buptdf/wap/default/part'
 
 # Create object
 em = buptelecmon.electricitymonitor.ElectricityMonitor()
@@ -15,12 +15,12 @@ em = buptelecmon.electricitymonitor.ElectricityMonitor()
 def test_query_with_http_error(requests_mock):
     requests_mock.post(PARTMENT_URL, status_code=500)
     with pytest.raises(requests.exceptions.HTTPError):
-        em.get_part_list()
+        em.get_part_list(1)
 
 # Before logging in
 def test_query_before_login():
     with pytest.raises(buptelecmon.exceptions.NeedLogin):
-        em.get_part_list()
+        em.get_part_list(1)
 
 # Internal Error
 def test_query_with_internal_error():

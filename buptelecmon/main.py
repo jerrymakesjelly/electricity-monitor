@@ -17,26 +17,35 @@ def convert_rat(remaining_hrs):
         remaining_hrs * 60 % 60, remaining_hrs * 3600 % 60
     )
 
+def convert_to_float(v):
+    ret = 0
+    try:
+        ret = float(v)
+    except:
+        pass
+    return ret
+
+
 # Output formater
 def output(dormitory, data, params=None):
     print('%s %s - Surplus: %.2f kWh (Free: %.2f kWh).' %
         (
             dormitory,
             data['time'],
-            float(data['surplus'])+float(data['freeEnd']), float(data['freeEnd'])
+            convert_to_float(data['surplus'])+convert_to_float(data['freeEnd']), convert_to_float(data['freeEnd'])
         )
     )
     print('\t- Voltage/Current/Power/Power Factor: %.1f V, %.3f A, %.1f W, %.2f.' %
         (
-            float(data['vTotal']),
-            float(data['iTotal']),
-            1000*float(data['pTotal']),
-            float(data['cosTotal'])
+            convert_to_float(data['vTotal']),
+            convert_to_float(data['iTotal']),
+            1000*convert_to_float(data['pTotal']),
+            convert_to_float(data['cosTotal'])
         )
     )
     print('\t- Available time: %s.' %
-        (convert_rat((float(data['surplus'])+float(data['freeEnd']) / float(data['pTotal'])))
-            if float(data['pTotal']) != 0 else 'Infinite')
+        (convert_rat((convert_to_float(data['surplus'])+convert_to_float(data['freeEnd']) / convert_to_float(data['pTotal'])))
+            if convert_to_float(data['pTotal']) != 0 else 'Infinite')
     )
 
 # Run once mode
