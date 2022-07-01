@@ -25,12 +25,17 @@ def convert_to_float(v):
         pass
     return ret
 
+def output(data, params=None):
+    if data['areaid'] == 1:
+        output_xitucheng(data, params)
+    else:
+        output_shahe(data, params)
 
 # Output formater
-def output(dormitory, data, params=None):
+def output_xitucheng(data, params=None):
     print('%s %s - Surplus: %.2f kWh (Free: %.2f kWh).' %
         (
-            dormitory,
+            data['dormName'],
             data['time'],
             convert_to_float(data['surplus'])+convert_to_float(data['freeEnd']), convert_to_float(data['freeEnd'])
         )
@@ -48,6 +53,16 @@ def output(dormitory, data, params=None):
             if convert_to_float(data['pTotal']) != 0 else 'Infinite')
     )
 
+def output_shahe(data, params=None):
+    # Shahe Campus's data format is different from Xitucheng Campus
+    print('%s %s - Surplus money: %.2f Yuan\t Total power consumption: %.2f kWh.' %
+        (
+            data['dormName'],
+            data['time'],
+            convert_to_float(data['surplus']), convert_to_float(data['freeEnd'])
+        )
+    )
+
 # Run once mode
 def once_mode(username, password, dormitories):
     ap.start_rotated_progress('Pulling data...')
@@ -56,7 +71,7 @@ def once_mode(username, password, dormitories):
     results = em.query(dormitories)
     ap.stop_progress()
     for dormitory in results:
-        output(dormitory, results[dormitory])
+        output(results[dormitory])
 
 # Run loop mode
 def loop_mode(username, password, dormitories):

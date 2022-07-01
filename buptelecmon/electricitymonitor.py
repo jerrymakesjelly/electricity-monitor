@@ -123,6 +123,7 @@ class ElectricityMonitor(object):
     def _convert_partment(self, dormitory_list):
         result = []
         for dormitory in dormitory_list:
+            dormName = dormitory
             parts = dormitory.split('-')
             if len(parts) > 1:
                 if parts[0].isnumeric():
@@ -175,6 +176,7 @@ class ElectricityMonitor(object):
                     'partmentName': partment_name,
                     'floor': floor, 
                     'dormitory': dormitory,
+                    'dormName': dormName,
                     'areaId': areaid
                 })
             else:
@@ -182,10 +184,13 @@ class ElectricityMonitor(object):
         return result
 
     # Query thread
-    def _query_thread(self, areaid, partment, floor, dormitory, succeed_callback):
-        for attempt in range(3):
+    def _query_thread(self, areaid, partment, floor, dormitory, dormName, succeed_callback):
+        for _ in range(3):
             try:
-                succeed_callback(dormitory, self.get_electricity_data(areaid, partment, floor, dormitory))
+                data = self.get_electricity_data(areaid, partment, floor, dormitory)
+                data['areaid'] = areaid
+                data['dormName'] = dormName
+                succeed_callback(dormitory, data)
                 break
             except Exception as e:
                 self._logger.error('Querying failure at %s: %s.' % (dormitory, repr(e)))
@@ -198,7 +203,7 @@ class ElectricityMonitor(object):
         dormitories = self._convert_partment(dormitory_list)
         for dormitory in dormitories:
             trd = threading.Thread(target=self._query_thread,
-                args=(dormitory['areaId'], dormitory['partmentId'], dormitory['floor'], dormitory['dormitory'],
+                args=(dormitory['areaId'], dormitory['partmentId'], dormitory['floor'], dormitory['dormitory'], dormitory['dormName'],
                 lambda dorm, data: result.update({dorm: data}),),
                 name='%s Pulling Thread' % dormitory['dormitory'])
             trd.start()
@@ -219,7 +224,7 @@ class ElectricityMonitor(object):
             start_time = datetime.now()
             results = self.query(dormitory_list)
             for dormitory in results:
-                callback_function(dormitory, results[dormitory], params)
+                callback_function(results[dormitory], params)
             end_time = datetime.now()
             # Fix request time
             fix_interval = (end_time - start_time).total_seconds()
