@@ -54,7 +54,7 @@ class ElectricityMonitor(object):
             raise buptelecmon.exceptions.LoginFailed('Login failed.')
 
         self._logger.debug('Login successful.')
-            
+
 
     # Send a query
     def _query(self, url, data=None):
@@ -63,7 +63,7 @@ class ElectricityMonitor(object):
         if res.status_code == requests.codes.ok:
             try:
                 response = res.json()
-            except simplejson.errors.JSONDecodeError as e:
+            except simplejson.errors.JSONDecodeError:
                 raise buptelecmon.exceptions.RemoteError('Bad response.', res.content)
 
             if 'e' in response and response['e'] == 0:
@@ -136,12 +136,12 @@ class ElectricityMonitor(object):
             if len(parts) > 1:
                 if parts[0].isnumeric():
                     # Xitucheng Campus
-                    areaid = 1 
+                    areaid = 1
                     partment_list = self.get_part_list(areaid)
                     partment_name = '学{}楼'.format(self._convert_to_uppercase_number(int(parts[0])))
                 else:
                     # Shahe Campus
-                    areaid = 2 
+                    areaid = 2
                     partment_list = self.get_part_list(areaid)
                     partment_name = parts[0]
 
@@ -180,9 +180,9 @@ class ElectricityMonitor(object):
                             break
 
                 result.append({
-                    'partmentId': partment_id, 
+                    'partmentId': partment_id,
                     'partmentName': partment_name,
-                    'floor': floor, 
+                    'floor': floor,
                     'dormitory': dormitory,
                     'dormName': dormName,
                     'areaId': areaid

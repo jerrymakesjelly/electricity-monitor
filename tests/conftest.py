@@ -1,5 +1,3 @@
-import os
-import random
 import pytest
 
 @pytest.fixture()

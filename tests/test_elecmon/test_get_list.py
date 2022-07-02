@@ -1,7 +1,6 @@
 import os
 import pytest
 import requests
-import requests_mock
 import buptelecmon.electricitymonitor
 import buptelecmon.exceptions
 

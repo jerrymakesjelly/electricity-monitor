@@ -13,7 +13,7 @@ class ConfigMan(object):
         module_path = os.path.join(os.path.expanduser('~'), '.%s' % module)
         os.makedirs(module_path, mode=0o755, exist_ok=True)
         return module_path
-    
+
     # Load configurations
     def read(self):
         with open(self._path, 'r', encoding='utf-8') as f:
