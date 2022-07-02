@@ -3,6 +3,7 @@ import time
 import socket
 import threading
 import requests
+import simplejson
 import urllib.parse
 from datetime import datetime
 import re
@@ -57,7 +58,11 @@ class ElectricityMonitor(object):
         self._logger.debug('Getting data from '+str(url)+' ['+str(data)+'].')
         res = self._session.post(url, allow_redirects=False, data=data)
         if res.status_code == requests.codes.ok:
-            response = res.json()
+            try:
+                response = res.json()
+            except simplejson.errors.JSONDecodeError as e:
+                raise buptelecmon.exceptions.RemoteError('Bad response.', res.content)
+
             if 'e' in response and response['e'] == 0:
                 if 'd' in response:
                     self._logger.debug('Getting data from '+str(url)+' is successful.')

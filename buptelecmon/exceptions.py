@@ -8,7 +8,7 @@ class NeedLogin(Exception):
         Exception.__init__(self, arg)
 
 class RemoteError(Exception):
-    def __init__(self, arg, remote_content):
+    def __init__(self, arg, remote_content = None):
         Exception.__init__(self, arg)
 
 class PartmentNameNotFound(Exception):
