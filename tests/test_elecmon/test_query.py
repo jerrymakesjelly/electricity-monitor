@@ -28,15 +28,15 @@ def test_query_with_wrong_format():
         em.query(['abc'])
 
 def test_query_with_invalid_partment():
-    with pytest.raises(buptelecmon.exceptions.InvalidDormitoryNumber):
+    with pytest.raises((buptelecmon.exceptions.InvalidDormitoryNumber)):
         em.query(['a-bcd-efg-hij'])
 
 def test_query_with_outbound_partment():
-    with pytest.raises(buptelecmon.exceptions.PartmentNameNotFound):
+    with pytest.raises(buptelecmon.exceptions.InvalidDormitoryNumber):
         em.query(['100-999'])
 
 def test_query_with_non_existed_partment():
-    with pytest.raises(buptelecmon.exceptions.PartmentNameNotFound):
+    with pytest.raises(buptelecmon.exceptions.InvalidDormitoryNumber):
         em.query(['12-888'])
 
 def test_query_correctly(test_dormitories):
@@ -59,7 +59,7 @@ def test_loop(test_dormitories):
     trd.start()
     with mock.patch('buptelecmon.electricitymonitor.ElectricityMonitor.query', return_value=results) as moc, \
         mock.patch('time.sleep'):
-        em.loop(test_dormitories, lambda d, r, p: None)
+        em.loop(test_dormitories, lambda d, p: None)
         moc.assert_called_with(test_dormitories)
         assert moc.call_count > 1
     trd.join()

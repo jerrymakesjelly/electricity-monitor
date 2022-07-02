@@ -4,4 +4,4 @@ import pytest
 
 @pytest.fixture()
 def test_dormitories():
-    return random.sample(os.environ['MENGXIAO_TEST_QUERY_LIST'].split(), 2)
+    return ['A-111', '1-111']
