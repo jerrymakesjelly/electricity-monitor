@@ -24,7 +24,8 @@ setup(name = 'buptelecmon',
     zip_safe = True,
     install_requires = [
         'requests',
-        'qrcode'
+        'qrcode',
+        'simplejson',
     ],
     entry_points = {
         'console_scripts':[
