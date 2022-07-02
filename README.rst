@@ -1,6 +1,6 @@
 BUPT Electricity Monitor 
 ==========================
-|PyPI| |TravisCI| |AppVeyorCI| |CodacyCoverage| |Codacy| |License|
+|PyPI| |Codacy| |CodacyCoverage| |License|
 
 Free yourself from the tedious operation, now you can just use a one-line command to view the electricity information of your dormitory.
 
@@ -14,29 +14,14 @@ The data comes from the BUPT Work WeChat. But please **notice that** this utilit
 .. |PyPI| image:: https://badge.fury.io/py/buptelecmon.svg
     :target: https://pypi.org/project/buptelecmon
 
-.. |TravisCI| image:: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor.svg
-    :target: https://www.travis-ci.org/jerrymakesjelly/electricity-monitor
-
-.. |AppVeyorCI| image:: https://ci.appveyor.com/api/projects/status/lqxj0s3fo21payke?svg=true
-    :target: https://ci.appveyor.com/project/jerrymakesjelly/electricity-monitor
-
-.. |Codecov| image:: https://codecov.io/gh/jerrymakesjelly/electricity-monitor/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/jerrymakesjelly/electricity-monitor
-
-.. |LGTMAlerts| image:: https://img.shields.io/lgtm/alerts/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
-  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/alerts/
-
-.. |LGTMQuality| image:: https://img.shields.io/lgtm/grade/python/g/jerrymakesjelly/electricity-monitor.svg?logo=lgtm&logoWidth=18
-  :target: https://lgtm.com/projects/g/jerrymakesjelly/electricity-monitor/context:python
-
 .. |License| image:: https://img.shields.io/github/license/jerrymakesjelly/electricity-monitor.svg
   :target: https://github.com/jerrymakesjelly/electricity-monitor/blob/master/LICENSE
 
-.. |Codacy| image:: https://img.shields.io/codacy/grade/d6136382fa05479db539fe3299dd0f29.svg
-  :target: https://www.codacy.com/project/jerrymakesjelly/electricity-monitor/dashboard
+.. |Codacy| image:: https://app.codacy.com/project/badge/Grade/b42cf7e1c8c44e5ab0c5d65514dca4bf
+  :target: https://www.codacy.com/gh/jerrymakesjelly/electricity-monitor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jerrymakesjelly/electricity-monitor&amp;utm_campaign=Badge_Grade
 
-.. |CodacyCoverage| image:: https://api.codacy.com/project/badge/coverage/d6136382fa05479db539fe3299dd0f29
-   :target: https://www.codacy.com/app/jerrymakesjelly/electricity-monitor
+.. |CodacyCoverage| image:: https://app.codacy.com/project/badge/Coverage/b42cf7e1c8c44e5ab0c5d65514dca4bf
+    :target: https://www.codacy.com/gh/jerrymakesjelly/electricity-monitor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jerrymakesjelly/electricity-monitor&amp;utm_campaign=Badge_Coverage
 
 Requirements
 -------------
