@@ -22,11 +22,7 @@ setup(name = 'buptelecmon',
     packages = find_packages(),
     include_package_data = True,
     zip_safe = True,
-    install_requires = [
-        'requests',
-        'qrcode',
-        'simplejson',
-    ],
+    install_requires = open('requirements.txt', 'r').read().split(),
     entry_points = {
         'console_scripts':[
             'elecinfo = buptelecmon.main:loader'

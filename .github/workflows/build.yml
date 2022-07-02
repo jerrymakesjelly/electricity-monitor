@@ -35,8 +35,8 @@ jobs:
         python -m pip install flake8 pytest
         python -m pip install --upgrade pytest
         python -m pip install --upgrade setuptools
+        python -m pip install -r requirements.txt
         python -m pip install -r requirements-dev.txt
-        python setup.py install
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -48,12 +48,15 @@ jobs:
         sleep $((10 + $RANDOM % 50))
     - name: Test with pytest
       run: |
-        py.test -s --cov-report=xml --cov --log-level=INFO
+        python -m py.test -s --cov-report=xml --cov --log-level=INFO
     - name: Save coverage report
       uses: actions/upload-artifact@v2
       with:
         name: coverage.xml
         path: coverage.xml
+    - name: Test Installation
+      run: |
+        python setup.py install
   codacy-coverage-reporter:
     runs-on: ubuntu-latest
     name: codacy-coverage-reporter
