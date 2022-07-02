@@ -6,7 +6,7 @@ name: build
 on: [push]
 
 env:
-  MENGXIAO_USERNAME: ${{ secrets.MENGXIAO_USERNAME }}
+  MENGXIAO_STUDENT_ID: ${{ secrets.MENGXIAO_USERNAME }}
   MENGXIAO_PASSWORD: ${{ secrets.MENGXIAO_PASSWORD }}
 
 jobs:
