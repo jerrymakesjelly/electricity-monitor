@@ -48,8 +48,8 @@ def output_xitucheng(data, params=None):
             convert_to_float(data['cosTotal'])
         )
     )
-    print('\t- Available time: %s.' %
-        (convert_rat((convert_to_float(data['surplus'])+convert_to_float(data['freeEnd']) / convert_to_float(data['pTotal'])))
+    print('\t- Estimated to run out: %s.' %
+        (convert_rat((convert_to_float(data['surplus'])+convert_to_float(data['freeEnd'])) / convert_to_float(data['pTotal']))
             if convert_to_float(data['pTotal']) != 0 else 'Infinite')
     )
 
