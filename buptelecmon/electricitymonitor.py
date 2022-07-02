@@ -157,7 +157,7 @@ class ElectricityMonitor(object):
                         break
 
                 if partment_id == '':
-                    raise buptelecmon.exceptions.PartmentNameNotFound('"'+parts[0]+'" is not in the partment list.')
+                    raise buptelecmon.exceptions.InvalidDormitoryNumber('"'+parts[0]+'" is not in the partment list.')
 
                 # Speclate floor number
                 floor = 0
