@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import sys
 import qrcode
+import pwinput
 import buptelecmon.logger
 import buptelecmon.configurationmanager
 import buptelecmon.electricitymonitor
@@ -83,7 +84,7 @@ def loop_mode(username, password, dormitories):
 # Set authorization mode
 def set_auth():
     user = input('Student ID: ')
-    password = input('Password: ')
+    password = pwinput.pwinput('Password: ')
     return (user, password)
 
 # Recharge mode
