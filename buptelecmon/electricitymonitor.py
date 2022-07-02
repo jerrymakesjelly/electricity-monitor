@@ -29,7 +29,10 @@ class ElectricityMonitor(object):
 
         self._logger.debug('Logging in.')
         res = self._session.get(login_url)
-        execution = re.findall(r'input name="execution" value="(.*)"/><input name="_eventId"', str(res.content))[0]
+        execution = re.findall(r'input name="execution" value="(.*)"/><input name="_eventId"', str(res.content))
+        if len(execution) == 0:
+            raise buptelecmon.exceptions.LoginFailed('No execution code found.')
+        execution = execution[0]
 
         login_form = {
             'submit': "LOGIN",
@@ -43,12 +46,12 @@ class ElectricityMonitor(object):
         # get login cookies
         res = self._session.post(login_url, data=login_form, allow_redirects=False)
         if res.status_code != requests.codes.found: # 302 is the expected code
-            raise buptelecmon.exceptions.RemoteError('Login failed.')
+            raise buptelecmon.exceptions.LoginFailed('Login failed.')
 
         # get chong cookies
         res = self._session.post(chong_url, allow_redirects=True)
         if res.status_code == requests.codes.found: # 302 is the expected code
-            raise buptelecmon.exceptions.RemoteError('Login failed.')
+            raise buptelecmon.exceptions.LoginFailed('Login failed.')
 
         self._logger.debug('Login successful.')
             
