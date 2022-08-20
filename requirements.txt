@@ -2,3 +2,4 @@ requests
 qrcode
 simplejson
 pwinput
+bupt-session

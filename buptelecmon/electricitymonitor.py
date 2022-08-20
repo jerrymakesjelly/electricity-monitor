@@ -9,6 +9,7 @@ from datetime import datetime
 import re
 import buptelecmon.logger
 import buptelecmon.exceptions
+from bupt_session_py.session import Session
 
 class ElectricityMonitor(object):
     _logger = buptelecmon.logger.register(__name__)
@@ -16,37 +17,18 @@ class ElectricityMonitor(object):
     def __init__(self):
         self._username = ''
         self._password = ''
-        self._session = requests.Session()
-        self._session.headers.update({
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36",
-        })
+        self._session = Session()
         self._looping = False
 
     # Login to the service
     def login(self, username, password):
-        login_url = 'https://auth.bupt.edu.cn/authserver/login'
         chong_url = 'https://app.bupt.edu.cn/buptdf/wap/default/chong'
 
         self._logger.debug('Logging in.')
-        res = self._session.get(login_url)
-        execution = re.findall(r'input name="execution" value="(.*)"/><input name="_eventId"', str(res.content))
-        if len(execution) == 0:
-            raise buptelecmon.exceptions.LoginFailed('No execution code found.')
-        execution = execution[0]
-
-        login_form = {
-            'submit': "LOGIN",
-            'type': "username_password",
-            '_eventId': "submit",
-            'username': username,
-            'password': password,
-            'execution': execution,
-        }
-
-        # get login cookies
-        res = self._session.post(login_url, data=login_form, allow_redirects=False)
-        if res.status_code != requests.codes.found: # 302 is the expected code
-            raise buptelecmon.exceptions.LoginFailed('Login failed.')
+        try:
+            self._session.login(username, password)
+        except Exception as e:
+            raise e
 
         # get chong cookies
         res = self._session.post(chong_url, allow_redirects=True)
